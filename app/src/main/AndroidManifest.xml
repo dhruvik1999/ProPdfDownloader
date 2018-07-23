@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".Home" />
         <activity android:name=".Internet_lost" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
