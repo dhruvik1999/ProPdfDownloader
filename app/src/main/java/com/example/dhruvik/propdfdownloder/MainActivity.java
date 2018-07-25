@@ -1,8 +1,11 @@
 package com.example.dhruvik.propdfdownloder;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -23,11 +27,13 @@ public class MainActivity extends AppCompatActivity {
     public static ViewHolder viewHolder;
     private ArrayList<Data> array;
     private SwipeFlingAdapterView flingContainer;
+    DownloadManager dm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 
         flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
@@ -94,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
         public static FrameLayout background;
         public TextView DataText;
         public ImageView cardImage;
-
-
     }
 
     public class MyAppAdapter extends BaseAdapter {
@@ -139,6 +143,15 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.DataText = (TextView) rowView.findViewById(R.id.bookText);
                 viewHolder.background = (FrameLayout) rowView.findViewById(R.id.background);
                 viewHolder.cardImage = (ImageView) rowView.findViewById(R.id.cardImage);
+
+                viewHolder.cardImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("Clicked",String.valueOf(position) + "          555555555555555555555555555555555555555000");
+                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Home.boog_get_url.get(position)));
+                        dm.enqueue(request);
+                    }
+                });
                 rowView.setTag(viewHolder);
 
             } else {

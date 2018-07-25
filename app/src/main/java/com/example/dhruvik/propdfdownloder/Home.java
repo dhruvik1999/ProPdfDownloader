@@ -2,6 +2,7 @@ package com.example.dhruvik.propdfdownloder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,9 @@ public class Home extends AppCompatActivity {
     Thread thread;
     Handler handler;
 
+    static int total_book = 0;
+    static int downloaded_book = 0;
+
     static ArrayList<String> book_url;
     static ArrayList<String> book_img;
     static ArrayList<String> boog_get_url;
@@ -39,26 +43,32 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         initiallization();
 
+        total_book = 0;
+        downloaded_book = 0;
+
+
         Runnable r = new Runnable() {
             @Override
             public void run() {
+
 
                 book_url.clear();
                 book_img.clear();
                 boog_get_url.clear();
                 result = "";
                 try {
-                    document = Jsoup.connect("http://gen.lib.rus.ec/search.php?req="+name.getText().toString()+"&lg_topic=libgen&open=0&view=simple&res=25&phrase=0&column=def").userAgent("Chrome").timeout(5000).get();
+                    document = Jsoup.connect("http://gen.lib.rus.ec/search.php?req="+name.getText().toString()+"&lg_topic=libgen&open=0&view=simple&res=25&phrase=0&column=def").userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.21 (KHTML, like Gecko) Chrome/19.0.1042.0 Safari/535.21").get();
                     Elements link = document.select("a[title='Gen.lib.rus.ec']");
 
                     for(Element l : link){
+                        total_book ++;
                         String t="";
                         t = l.attr("href");
                         book_url.add(t);
                         get_image_url(t);
                         Log.i("LINK",t);
 
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     }
 
                 } catch (IOException e) {
@@ -83,6 +93,7 @@ public class Home extends AppCompatActivity {
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ProgressBarView.class));
                 Toast.makeText(getApplicationContext(),name.getText().toString(), Toast.LENGTH_SHORT ).show();
                 thread.start();
             }
@@ -115,6 +126,7 @@ public class Home extends AppCompatActivity {
             String s = image.absUrl("src");
             book_img.add(s);
             s ="";
+            downloaded_book++;
         } catch (IOException e) {
             e.printStackTrace();
         }

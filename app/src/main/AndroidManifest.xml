@@ -22,7 +22,9 @@
         </activity>
         <activity android:name=".Home" />
         <activity android:name=".Internet_lost" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ProgressBarView" />
+        <activity android:name=".WebBook"></activity>
     </application>
 
 </manifest>

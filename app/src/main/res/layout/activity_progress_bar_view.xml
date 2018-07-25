@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/book_loading_background"
+    tools:context=".ProgressBarView">
+
+
+    <com.victor.loading.book.BookLoading
+        android:id="@+id/bookLoad"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"></com.victor.loading.book.BookLoading>
+
+    <TextView
+        android:id="@+id/fg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor="#ffff"
+        android:text="100 Books"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="131dp" />
+</RelativeLayout>

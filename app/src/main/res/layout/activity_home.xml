@@ -32,12 +32,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/find">
 
-        <TextView
-            android:id="@+id/data"
-            android:gravity="center"
-            android:text="ddd"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </ScrollView>
 
 
